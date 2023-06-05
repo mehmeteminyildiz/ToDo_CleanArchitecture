@@ -12,9 +12,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.my.todoclean.feature_todo.domain.model.Todo
+import com.my.todoclean.ui.theme.SelectedRB
+import com.my.todoclean.ui.theme.UnselectedRB
 
 @Composable
 fun TodoItem(
@@ -32,7 +35,7 @@ fun TodoItem(
     onDeleteClick: () -> Unit,
     onCheckClick: (newStatus: Boolean) -> Unit
 ) {
-    val isCompletedState = remember{ mutableStateOf(todo.isCompleted) }
+    val isCompletedState = remember { mutableStateOf(todo.isCompleted) }
 
     Box(modifier = modifier.background(color = Color(todo.color))) {
         Row(
@@ -43,7 +46,11 @@ fun TodoItem(
                 onClick = {
                     isCompletedState.value = !todo.isCompleted
                     onCheckClick(!todo.isCompleted)
-                }
+                },
+                colors = RadioButtonDefaults.colors(
+                    selectedColor = SelectedRB,
+                    unselectedColor = UnselectedRB
+                )
             )
             Box {
                 Column(
@@ -78,7 +85,7 @@ fun TodoItem(
                     modifier = Modifier.align(Alignment.BottomEnd)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Delete,
+                        imageVector = Icons.Default.Cancel,
                         contentDescription = "Delete To Do",
                         tint = MaterialTheme.colors.onSurface
                     )

@@ -38,7 +38,6 @@ import com.my.todoclean.feature_todo.presentation.todos.components.OrderSection
 import com.my.todoclean.feature_todo.presentation.todos.components.TodoItem
 import com.my.todoclean.feature_todo.presentation.util.Screen
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @Composable
 fun TodosScreen(
@@ -61,7 +60,6 @@ fun TodosScreen(
                     contentDescription = "Add To Do",
                     tint = MaterialTheme.colors.onSurface
                 )
-
             }
         },
         scaffoldState = scaffoldState
@@ -124,7 +122,6 @@ fun TodosScreen(
                                     viewModel.onEvent(TodosEvent.RestoreTodo)
                                 }
                             }
-
                         },
                         onCheckClick = { newStatus ->
                             println("onCheckClick, newStatus -> $newStatus")
