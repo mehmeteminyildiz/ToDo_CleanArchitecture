@@ -14,6 +14,7 @@ data class Todo(
     val content: String,
     val timestamp: Long,
     val color: Int,
+    var isCompleted : Boolean,
     @PrimaryKey val id: Int? = null
 ) {
     companion object {

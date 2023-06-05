@@ -24,4 +24,8 @@ class TodoRepositoryImpl(
     override suspend fun deleteTodo(todo: Todo) {
         dao.deleteTodo(todo = todo)
     }
+
+    override suspend fun updateIsCompletedStatus(todo: Todo) {
+        dao.updateIsCompletedStatus(todo)
+    }
 }

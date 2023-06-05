@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.my.todoclean.feature_todo.domain.model.Todo
 import kotlinx.coroutines.flow.Flow
 
@@ -22,4 +23,8 @@ interface TodoDao {
 
     @Delete
     suspend fun deleteTodo(todo: Todo)
+
+    @Update
+    suspend fun updateIsCompletedStatus(todo: Todo)
+
 }

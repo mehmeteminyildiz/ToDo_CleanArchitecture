@@ -10,6 +10,7 @@ import com.my.todoclean.feature_todo.domain.use_case.DeleteTodo
 import com.my.todoclean.feature_todo.domain.use_case.GetTodo
 import com.my.todoclean.feature_todo.domain.use_case.GetTodos
 import com.my.todoclean.feature_todo.domain.use_case.TodoUseCases
+import com.my.todoclean.feature_todo.domain.use_case.UpdateStatus
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +46,8 @@ object AppModule {
             getTodos = GetTodos(repository),
             deleteTodo = DeleteTodo(repository),
             addTodo = AddTodo(repository),
-            getTodo = GetTodo(repository)
+            getTodo = GetTodo(repository),
+            updateStatus = UpdateStatus(repository)
         )
     }
 }

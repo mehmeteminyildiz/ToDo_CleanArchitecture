@@ -61,6 +61,13 @@ class TodosViewModel
                     isOrderSectionVisible = !state.value.isOrderSectionVisible
                 )
             }
+
+            is TodosEvent.UpdateStatus -> {
+                viewModelScope.launch {
+                    event.todo.isCompleted = !event.todo.isCompleted
+                    todoUseCases.updateStatus(todo = event.todo)
+                }
+            }
         }
     }
 

@@ -38,6 +38,7 @@ import com.my.todoclean.feature_todo.presentation.todos.components.OrderSection
 import com.my.todoclean.feature_todo.presentation.todos.components.TodoItem
 import com.my.todoclean.feature_todo.presentation.util.Screen
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @Composable
 fun TodosScreen(
@@ -51,7 +52,7 @@ fun TodosScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                          navController.navigate(Screen.AddEditTodoScreen.route)
+                    navController.navigate(Screen.AddEditTodoScreen.route)
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
@@ -107,13 +108,12 @@ fun TodosScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                       navController.navigate(
-                                           Screen.AddEditTodoScreen.route +
-                                                   "?todoId=${todo.id}&todoColor=${todo.color}"
-                                       )
+                                navController.navigate(
+                                    Screen.AddEditTodoScreen.route +
+                                            "?todoId=${todo.id}&todoColor=${todo.color}"
+                                )
                             },
-                        onDeleteClick =
-                        {
+                        onDeleteClick = {
                             viewModel.onEvent(TodosEvent.DeleteTodo(todo))
                             scope.launch {
                                 val result = scaffoldState.snackbarHostState.showSnackbar(
@@ -125,6 +125,10 @@ fun TodosScreen(
                                 }
                             }
 
+                        },
+                        onCheckClick = { newStatus ->
+                            println("onCheckClick, newStatus -> $newStatus")
+                            viewModel.onEvent(TodosEvent.UpdateStatus(todo))
                         }
                     )
                     Spacer(modifier = Modifier.height(16.dp))

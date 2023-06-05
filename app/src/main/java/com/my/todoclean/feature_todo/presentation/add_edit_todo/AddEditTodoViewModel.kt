@@ -87,7 +87,8 @@ class AddEditTodoViewModel
                                 content = todoContent.value.text,
                                 timestamp = System.currentTimeMillis(),
                                 color = todoColor.value,
-                                id = currentTodoId
+                                id = currentTodoId,
+                                isCompleted = false
                             )
                         )
                         _eventFlow.emit(UiEvent.SaveTodo)
