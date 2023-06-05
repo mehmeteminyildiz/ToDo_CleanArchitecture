@@ -1,4 +1,4 @@
-package com.my.todoclean.feature_todo.presentation.todos.components
+package com.my.todoclean.feature_todo.presentation.todos
 
 import com.my.todoclean.feature_todo.domain.model.Todo
 import com.my.todoclean.feature_todo.domain.util.TodoOrder

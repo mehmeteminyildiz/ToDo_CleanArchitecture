@@ -90,7 +90,7 @@ class AddEditTodoViewModel
                                 id = currentTodoId
                             )
                         )
-                        _eventFlow.emit(UiEvent.SaveNote)
+                        _eventFlow.emit(UiEvent.SaveTodo)
                     } catch (e: InvalidTodoException) {
                         _eventFlow.emit(
                             UiEvent.ShowSnackBar(
@@ -106,6 +106,6 @@ class AddEditTodoViewModel
 
     sealed class UiEvent {
         data class ShowSnackBar(val message: String) : UiEvent()
-        object SaveNote : UiEvent()
+        object SaveTodo : UiEvent()
     }
 }
