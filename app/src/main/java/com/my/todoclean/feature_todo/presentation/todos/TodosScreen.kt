@@ -36,6 +36,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.my.todoclean.feature_todo.presentation.todos.components.OrderSection
 import com.my.todoclean.feature_todo.presentation.todos.components.TodoItem
+import com.my.todoclean.feature_todo.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -50,6 +51,7 @@ fun TodosScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
+                          navController.navigate(Screen.AddEditTodoScreen.route)
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
@@ -105,7 +107,10 @@ fun TodosScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                // TODO: Navigation
+                                       navController.navigate(
+                                           Screen.AddEditTodoScreen.route +
+                                                   "?todoId=${todo.id}&todoColor=${todo.color}"
+                                       )
                             },
                         onDeleteClick =
                         {
