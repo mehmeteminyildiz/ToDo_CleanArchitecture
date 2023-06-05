@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -28,6 +29,7 @@ import com.my.todoclean.feature_todo.domain.model.Todo
 import com.my.todoclean.ui.theme.SelectedRB
 import com.my.todoclean.ui.theme.UnselectedRB
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TodoItem(
     todo: Todo,
@@ -37,7 +39,11 @@ fun TodoItem(
 ) {
     val isCompletedState = remember { mutableStateOf(todo.isCompleted) }
 
-    Box(modifier = modifier.background(color = Color(todo.color))) {
+
+    Box(
+        modifier = modifier
+            .background(color = Color(todo.color))
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -102,3 +108,4 @@ fun TodoItem(
 
 
 }
+
