@@ -9,14 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,24 +37,22 @@ fun TodoItem(
 
 
     Box(
-        modifier = modifier
-            .background(color = Color(todo.color))
+        modifier = modifier.background(color = Color(todo.color))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
-                selected = isCompletedState.value,
-                onClick = {
+                selected = isCompletedState.value, onClick = {
                     isCompletedState.value = !todo.isCompleted
                     onCheckClick(!todo.isCompleted)
-                },
-                colors = RadioButtonDefaults.colors(
-                    selectedColor = SelectedRB,
-                    unselectedColor = UnselectedRB
+                }, colors = RadioButtonDefaults.colors(
+                    selectedColor = SelectedRB, unselectedColor = UnselectedRB
                 )
             )
-            Box {
+            Box(
+                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+            ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -66,7 +60,7 @@ fun TodoItem(
                         .padding(end = 32.dp)
 
                 ) {
-//            Title
+                    // Title
                     Text(
                         text = todo.title,
                         style = MaterialTheme.typography.h6,
@@ -76,7 +70,7 @@ fun TodoItem(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
 
-//            Content
+                    // Content
                     Text(
                         text = todo.content,
                         style = MaterialTheme.typography.body1,
@@ -85,27 +79,9 @@ fun TodoItem(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-//                Delete Button
-                IconButton(
-                    onClick = onDeleteClick,
-                    modifier = Modifier.align(Alignment.BottomEnd)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Cancel,
-                        contentDescription = "Delete To Do",
-                        tint = MaterialTheme.colors.onSurface
-                    )
-
-                }
-
+                MyDropdown(onItemClick = onDeleteClick)
             }
-
         }
-
-
-//
     }
-
-
 }
 
