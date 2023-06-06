@@ -8,6 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
@@ -18,11 +21,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.my.todoclean.feature_todo.domain.model.Todo
 import com.my.todoclean.ui.theme.SelectedRB
+import com.my.todoclean.ui.theme.TextSecondary
 import com.my.todoclean.ui.theme.UnselectedRB
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -35,53 +43,80 @@ fun TodoItem(
 ) {
     val isCompletedState = remember { mutableStateOf(todo.isCompleted) }
 
-
-    Box(
-        modifier = modifier.background(color = Color(todo.color))
+    Card(
+        elevation = 2.dp, modifier = Modifier.padding(vertical = 8.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            RadioButton(
-                selected = isCompletedState.value, onClick = {
-                    isCompletedState.value = !todo.isCompleted
-                    onCheckClick(!todo.isCompleted)
-                }, colors = RadioButtonDefaults.colors(
-                    selectedColor = SelectedRB, unselectedColor = UnselectedRB
-                )
-            )
+        Row(modifier = Modifier.fillMaxSize()) {
+
             Box(
-                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+                modifier = modifier.background(color = Color.White)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(4.dp)
-                        .padding(end = 32.dp)
-
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Title
-                    Text(
-                        text = todo.title,
-                        style = MaterialTheme.typography.h6,
-                        color = MaterialTheme.colors.onSurface,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                    RadioButton(
+                        selected = isCompletedState.value, onClick = {
+                            isCompletedState.value = !todo.isCompleted
+                            onCheckClick(!todo.isCompleted)
+                        }, colors = RadioButtonDefaults.colors(
+                            selectedColor = SelectedRB, unselectedColor = UnselectedRB
+                        )
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Box(
+                        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(4.dp)
+                                .padding(end = 32.dp)
+                        ) {
+                            // Title
+                            Text(
+                                text = todo.title,
+                                modifier = Modifier,
+                                color = MaterialTheme.colors.onSurface,
+                                fontSize = 16.sp,
+                                style = TextStyle(fontWeight = FontWeight.Bold),
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
 
-                    // Content
-                    Text(
-                        text = todo.content,
-                        style = MaterialTheme.typography.body1,
-                        color = MaterialTheme.colors.onSurface,
-                        maxLines = 10,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                            // Content
+                            Text(
+                                text = todo.content,
+                                modifier = Modifier.padding(bottom = 4.dp),
+                                color = TextSecondary,
+                                fontSize = 12.sp,
+                                style = TextStyle(),
+                                overflow = TextOverflow.Ellipsis
+                            )
+
+
+                            Card(
+                                modifier = Modifier
+                                    .padding(vertical = 4.dp)
+                                    .wrapContentSize()
+                                    .clip(RoundedCornerShape(8.dp)),
+                                backgroundColor = Color(todo.color)
+                            ) {
+                                Text(
+                                    text = "okul",
+                                    modifier = Modifier.padding(vertical = 2.dp, horizontal = 8.dp),
+                                    color = MaterialTheme.colors.onSurface,
+                                    fontSize = 16.sp,
+                                    style = TextStyle(fontWeight = FontWeight.Bold),
+                                    overflow = TextOverflow.Ellipsis
+
+                                )
+                            }
+                        }
+                        MyDropdown(onItemClick = onDeleteClick)
+                    }
                 }
-                MyDropdown(onItemClick = onDeleteClick)
             }
         }
+
     }
 }
 

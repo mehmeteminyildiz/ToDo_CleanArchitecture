@@ -1,7 +1,9 @@
 package com.my.todoclean.feature_todo.presentation.todos.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -26,17 +28,18 @@ fun MyDropdown(
     var expanded by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.CenterEnd)
+            .fillMaxWidth()
+            .wrapContentSize(Alignment.CenterEnd),
     ) {
         IconButton(onClick = { expanded = true }) {
             Icon(
                 Icons.Default.MoreVert,
                 contentDescription = "Localized description",
-                tint = MaterialTheme.colors.background
+                tint = MaterialTheme.colors.onSurface
             )
         }
         DropdownMenu(
+            modifier = Modifier.background(MaterialTheme.colors.background),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {

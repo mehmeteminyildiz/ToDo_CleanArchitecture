@@ -37,6 +37,7 @@ import androidx.navigation.NavController
 import com.my.todoclean.feature_todo.presentation.todos.components.OrderSection
 import com.my.todoclean.feature_todo.presentation.todos.components.TodoItem
 import com.my.todoclean.feature_todo.presentation.util.Screen
+import com.my.todoclean.ui.theme.TextColor
 import kotlinx.coroutines.launch
 
 @Composable
@@ -53,12 +54,13 @@ fun TodosScreen(
                 onClick = {
                     navController.navigate(Screen.AddEditTodoScreen.route)
                 },
-                backgroundColor = MaterialTheme.colors.primary
+                backgroundColor = MaterialTheme.colors.primary,
+
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add To Do",
-                    tint = MaterialTheme.colors.onSurface
+                    tint = MaterialTheme.colors.onBackground
                 )
             }
         },
@@ -75,7 +77,7 @@ fun TodosScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "To Do", style = MaterialTheme.typography.h4)
+                Text(text = "To Do", style = MaterialTheme.typography.h4, color =MaterialTheme.colors.primary)
                 IconButton(onClick = {
                     viewModel.onEvent(TodosEvent.ToggleOrderSection)
                 }) {
@@ -128,7 +130,7 @@ fun TodosScreen(
                             viewModel.onEvent(TodosEvent.UpdateStatus(todo))
                         }
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
 
