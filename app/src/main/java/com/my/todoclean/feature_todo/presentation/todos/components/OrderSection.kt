@@ -1,5 +1,6 @@
 package com.my.todoclean.feature_todo.presentation.todos.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -50,7 +51,8 @@ fun OrderSection(
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth()
+        ) {
             DefaultRadioButton(
                 text = "Ascending",
                 selected = todoOrder.orderType is OrderType.Ascending,

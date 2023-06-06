@@ -56,7 +56,7 @@ fun TodosScreen(
                 },
                 backgroundColor = MaterialTheme.colors.primary,
 
-            ) {
+                ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add To Do",
@@ -77,11 +77,18 @@ fun TodosScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "To Do", style = MaterialTheme.typography.h4, color =MaterialTheme.colors.primary)
-                IconButton(onClick = {
-                    viewModel.onEvent(TodosEvent.ToggleOrderSection)
-                }) {
-                    Icon(imageVector = Icons.Default.Sort, contentDescription = "Sort")
+                Text(
+                    text = "To Do",
+                    style = MaterialTheme.typography.h4,
+                    color = MaterialTheme.colors.primary
+                )
+                IconButton(
+                    onClick = {
+                        viewModel.onEvent(TodosEvent.ToggleOrderSection)
+                    },
+
+                ) {
+                    Icon(imageVector = Icons.Default.Sort, contentDescription = "Sort", tint = TextColor)
                 }
             }
             AnimatedVisibility(

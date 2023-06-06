@@ -91,8 +91,6 @@ fun TodoItem(
                                 style = TextStyle(),
                                 overflow = TextOverflow.Ellipsis
                             )
-
-
                             Card(
                                 modifier = Modifier
                                     .padding(vertical = 4.dp)
